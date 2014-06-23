@@ -35,7 +35,7 @@ class MailChimpCached extends MailChimp
 			mkdir($dir, 0777, true);
 		}
 
-		$file = $dir.'/'.md5(join(',', array_merge(array_keys($args), array_values($args))));
+		$file = $dir.'/'.md5(serialize($args));
 
 		if (file_exists($file) && time() - filemtime($file) <
 			(array_key_exists($method, $this->method_lifetimes) ? $this->method_lifetimes[$method]
