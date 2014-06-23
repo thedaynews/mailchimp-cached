@@ -10,7 +10,7 @@
  */
 class MailChimpCached extends MailChimp
 {
-	private $cache_dir = '/tmp';
+	private $cache_dir;
 
 	/**
 	 * Time, in seconds, to cache data from specific methods
@@ -19,6 +19,16 @@ class MailChimpCached extends MailChimp
 		'campaigns/list' => 3600,
 		'campaigns/content' => 600
 	);
+
+	/**
+	 * Create a new instance
+	 * @param string $api_key Your MailChimp API key
+	 */
+	function __construct($api_key, $cache_dir = '/tmp')
+	{
+		$this->cache_dir = $cache_dir;
+		parent::__construct($api_key);
+	}
 
 	/**
 	 * Call an API method. Every request needs the API key, so that is added automatically -- you don't need to pass it in.
